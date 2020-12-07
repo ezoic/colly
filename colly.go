@@ -632,6 +632,10 @@ func (c *Collector) fetch(u, method string, depth int, requestData io.Reader, ct
 
 	c.handleOnRequest(request)
 
+	if host := request.Headers.Get("Host"); host != "" {
+		req.Host = host
+	}
+
 	if request.abort {
 		return nil
 	}
